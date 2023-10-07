@@ -16,6 +16,7 @@ using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Business;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore.Query.Internal;
+using Business.BusinessAspects.AutoFac;
 
 namespace Business.Concrete
 {
@@ -35,6 +36,8 @@ namespace Business.Concrete
             _categoryService = categoryService;
         }
 
+        //Claim
+        [SecuredOperation("Product.add")]
         [ValidationAspect(typeof(ProductValidator))]
         public IResult Add(Product product)
         {
